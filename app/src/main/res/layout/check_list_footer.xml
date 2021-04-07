@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_line_height"
+            android:background="@color/divider_line_background" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/check_list_horizontal_padding"
+            android:paddingTop="@dimen/check_list_vertical_padding"
+            android:paddingEnd="@dimen/check_list_horizontal_padding"
+            android:paddingBottom="@dimen/check_list_vertical_padding">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/subtotal"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/check_list_footer_total_text_size" />
+
+            <TextView
+                android:id="@+id/check_list_footer_subtotal_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/check_list_footer_total_text_size"
+                android:textStyle="bold"
+                tools:text="$315.00" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/check_list_footer_delivery_fee_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/check_list_horizontal_padding"
+            android:paddingTop="@dimen/check_list_vertical_padding"
+            android:paddingEnd="@dimen/check_list_horizontal_padding"
+            android:paddingBottom="@dimen/check_list_vertical_padding">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/delivery_fee"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/check_list_footer_total_text_size" />
+
+            <TextView
+                android:id="@+id/check_list_footer_delivery_fee_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/check_list_footer_total_text_size"
+                android:textStyle="bold"
+                tools:text="$315.00" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/check_list_horizontal_padding"
+            android:paddingTop="@dimen/check_list_vertical_padding"
+            android:paddingEnd="@dimen/check_list_horizontal_padding"
+            android:paddingBottom="@dimen/check_list_vertical_padding">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/your_total"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/check_list_footer_total_text_size" />
+
+            <TextView
+                android:id="@+id/check_list_footer_total_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/check_list_footer_total_text_size"
+                android:textStyle="bold"
+                tools:text="$315.00" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/check_list_horizontal_padding"
+            android:paddingTop="@dimen/check_list_vertical_padding"
+            android:paddingEnd="@dimen/check_list_horizontal_padding"
+            android:paddingBottom="@dimen/check_list_vertical_padding">
+
+            <TextView
+                android:id="@+id/check_list_footer_recommended_tip_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/recommended_tip_format"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/check_list_footer_total_text_size" />
+
+            <TextView
+                android:id="@+id/check_list_footer_recommended_tip_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="end"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/check_list_footer_total_text_size"
+                android:textStyle="bold"
+                tools:text="$31.50" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/check_list_horizontal_padding"
+            android:layout_marginEnd="@dimen/check_list_horizontal_padding"
+            android:layout_marginTop="@dimen/check_list_vertical_padding"
+            android:layout_marginBottom="@dimen/check_list_vertical_padding"
+            android:text="@string/pay"/>
+    </LinearLayout>
+</layout>

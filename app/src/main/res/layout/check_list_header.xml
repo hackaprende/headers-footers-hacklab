@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/check_list_header_padding"
+            android:text="@string/your_check"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/check_list_header_text_size" />
+
+        <TextView
+            android:id="@+id/check_list_header_delivery_address_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="16dp"
+            android:textColor="@color/text_black"
+            android:fontFamily="sans-serif-medium"
+            tools:text="Address: Cupboard below the stairs, Privet Drive #4, Little Whinging, Surrey" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_line_height"
+            android:background="@color/divider_line_background" />
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="check_list_horizontal_padding">42dp</dimen>
+    <dimen name="check_list_vertical_padding">8dp</dimen>
+    <dimen name="view_line_height">1dp</dimen>
+    <dimen name="check_list_footer_total_text_size">16sp</dimen>
+    <dimen name="check_list_item_name_text_size">16sp</dimen>
+    <dimen name="check_list_header_padding">16dp</dimen>
+    <dimen name="check_list_header_text_size">20sp</dimen>
+</resources>
