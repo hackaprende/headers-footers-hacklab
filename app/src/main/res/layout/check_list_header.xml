@@ -21,7 +21,7 @@
             android:textSize="@dimen/check_list_header_text_size" />
 
         <TextView
-            android:id="@+id/check_list_header_delivery_address_text"
+            android:id="@+id/delivery_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

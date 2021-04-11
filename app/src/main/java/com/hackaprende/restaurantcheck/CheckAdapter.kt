@@ -1,121 +1,137 @@
 package com.hackaprende.restaurantcheck
 
-import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hackaprende.restaurantcheck.databinding.CheckListFooterBinding
 import com.hackaprende.restaurantcheck.databinding.CheckListHeaderBinding
 import com.hackaprende.restaurantcheck.databinding.CheckListItemBinding
-import java.util.*
 
-class CheckAdapter(private val activity: Activity, private val checkItemList: MutableList<CheckItem>,
-                   private val deliveryAddress: String, private val deliveryFee: Double) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+private const val HEADER_VIEW_TYPE = 1
+private const val FOOTER_VIEW_TYPE = 2
 
-    companion object {
-        private const val HEADER_VIEW = 1
-        private const val FOOTER_VIEW = 2
+class CheckAdapter(private val checkItemList: MutableList<CheckItem>, private val deliveryAddress: String,
+                   private val deliveryFee: Double)
+    : ListAdapter<CheckItem, RecyclerView.ViewHolder>(DiffCallback) {
+
+    companion object DiffCallback : DiffUtil.ItemCallback<CheckItem>() {
+
+        override fun areItemsTheSame(oldItem: CheckItem,
+                                     newItem: CheckItem): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(oldItem: CheckItem,
+                                        newItem: CheckItem): Boolean {
+            return oldItem == newItem
+        }
     }
-
-    private var isCheckReview = false
-    private var tableTotal = 0.0
 
     override fun getItemViewType(position: Int): Int {
         if (position == 0) {
-            return HEADER_VIEW
+            return HEADER_VIEW_TYPE
         } else if (position == checkItemList.size + 1) {
-            return FOOTER_VIEW
+            return FOOTER_VIEW_TYPE
         }
 
         return super.getItemViewType(position)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == HEADER_VIEW) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
+            RecyclerView.ViewHolder {
+        if (viewType == HEADER_VIEW_TYPE) {
             val binding = CheckListHeaderBinding.inflate(LayoutInflater.from(parent.context))
             return HeaderViewHolder(binding)
-        } else if (viewType == FOOTER_VIEW) {
+        }
+
+        if (viewType == FOOTER_VIEW_TYPE) {
             val binding = CheckListFooterBinding.inflate(LayoutInflater.from(parent.context))
             return FooterViewHolder(binding)
         }
 
         val binding = CheckListItemBinding.inflate(LayoutInflater.from(parent.context))
-        return CheckItemHolder(binding)
+        return CheckItemViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder,
+                                  position: Int) {
         when (holder) {
-            is CheckItemHolder -> holder.bindView(position)
-            is FooterViewHolder -> holder.bindView()
-            is HeaderViewHolder -> holder.bindView()
+            is CheckItemViewHolder -> {
+                val checkItem = checkItemList[position - 1]
+                holder.bind(checkItem)
+            }
+            is HeaderViewHolder -> holder.bind(deliveryAddress)
+            is FooterViewHolder -> holder.bind(getSubtotal(), deliveryFee)
         }
+    }
+
+    private fun getSubtotal(): Double {
+        var subtotal = 0.0
+
+        for (checkItem in checkItemList) {
+            subtotal += (checkItem.price * checkItem.quantity)
+        }
+
+        return subtotal
     }
 
     override fun getItemCount(): Int {
-        if (checkItemList.size == 0) {
-            // Header + footer
-            return 2
-        }
-
-        // Add 2 extra views to show the header and footer views
         return checkItemList.size + 2
     }
 
-    inner class CheckItemHolder(binding: CheckListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        private val name = binding.checkListItemName
-        private val quantity = binding.checkListItemQuantity
-        private val price = binding.checkListItemPrice
+    inner class FooterViewHolder(binding: CheckListFooterBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        private val footerSubtotal = binding.footerSubtotal
+        private val deliveryFeeText = binding.footerDelivery
+        private val totalText = binding.footerTotal
+        private val tipText = binding.footerTip
+        private val recommendedTipText = binding.recTip
+        fun bind(subtotal: Double, deliveryFee: Double) {
+            val context = footerSubtotal.context
+            recommendedTipText.text = context.getString(R.string.recommended_tip_format,
+                10)
+            footerSubtotal.text = context.getString(
+                R.string.double_price_format,
+                subtotal
+            )
+            deliveryFeeText.text = context.getString(
+                R.string.double_price_format,
+                deliveryFee
+            )
 
-        fun bindView(position: Int) {
-            // We need to insert position -1 because of the footer
-            val checkItem = checkItemList[position - 1]
+            val total = subtotal + deliveryFee
 
-            name.text = checkItem.name
+            totalText.text = context.getString(R.string.double_price_format, total)
 
-            val checkItemQuantity = checkItem.quantity
-
-            quantity.text = checkItemQuantity.toString()
-            price.text = String.format(activity.getString(R.string.double_price_format), checkItem.price)
-
+            val tip = total * 0.1
+            tipText.text = context.getString(R.string.double_price_format, tip)
         }
     }
 
-    inner class HeaderViewHolder(binding: CheckListHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
-        private val deliveryAddressText = binding.checkListHeaderDeliveryAddressText
+    inner class HeaderViewHolder(binding: CheckListHeaderBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        private val deliveryAddressText = binding.deliveryAddress
 
-        fun bindView() {
+        fun bind(deliveryAddress: String) {
             deliveryAddressText.text = deliveryAddress
         }
     }
 
-    inner class FooterViewHolder(binding: CheckListFooterBinding) : RecyclerView.ViewHolder(binding.root) {
-        private val subtotalText = binding.checkListFooterSubtotalText
-        private val userCheckTotalTextView = binding.checkListFooterTotalText
-        private val deliveryFeeText = binding.checkListFooterDeliveryFeeText
-        private val recommendedTipText = binding.checkListFooterRecommendedTipText
-        private val recommendedTipTitle = binding.checkListFooterRecommendedTipTitle
+    inner class CheckItemViewHolder(binding: CheckListItemBinding):
+        RecyclerView.ViewHolder(binding.root) {
+        private val itemName = binding.itemName
+        private val itemQuantity = binding.itemQuantity
+        private val itemPrice = binding.itemPrice
 
-        fun bindView() {
-            var totalPrice = getCheckTotal()
+        fun bind(checkItem: CheckItem) {
+            itemName.text = checkItem.name
+            itemQuantity.text = checkItem.quantity.toString()
 
-            subtotalText.text = String.format(activity.getString(R.string.double_price_format), totalPrice)
-
-            deliveryFeeText.text = String.format(activity.getString(R.string.double_price_format), deliveryFee)
-            totalPrice += deliveryFee
-
-            userCheckTotalTextView.text = String.format(activity.getString(R.string.double_price_format), totalPrice)
-            recommendedTipTitle.text = String.format(activity.getString(R.string.recommended_tip_format), 10)
-            recommendedTipText.text = String.format(activity.getString(R.string.double_price_format), totalPrice / 10)
-        }
-
-        private fun getCheckTotal(): Double {
-            var total = 0.0
-            for (checkItem in checkItemList) {
-                total += (checkItem.quantity * checkItem.price)
-            }
-
-            return total
+            val context = itemPrice.context
+            itemPrice.text = context.getString(R.string.double_price_format,
+                checkItem.price)
         }
     }
 }

@@ -11,10 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/check_list_vertical_padding"
+        android:paddingBottom="16dp"
         android:paddingEnd="16dp"
         android:paddingStart="@dimen/check_list_horizontal_padding"
-        android:paddingTop="@dimen/check_list_vertical_padding">
+        android:paddingTop="16dp">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -28,14 +28,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/check_list_item_quantity"
+                    android:id="@+id/item_quantity"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     tools:text="2" />
 
                 <TextView
-                    android:id="@+id/check_list_item_name"
+                    android:id="@+id/item_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
@@ -44,7 +44,7 @@
                     tools:text="Orden de Alitas" />
 
                 <TextView
-                    android:id="@+id/check_list_item_price"
+                    android:id="@+id/item_price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -53,32 +53,9 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/check_list_item_status"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:fontFamily="sans-serif-light"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp"
-                    tools:text="Pending order" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

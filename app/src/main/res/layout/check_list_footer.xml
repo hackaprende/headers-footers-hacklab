@@ -34,7 +34,7 @@
                 android:textSize="@dimen/check_list_footer_total_text_size" />
 
             <TextView
-                android:id="@+id/check_list_footer_subtotal_text"
+                android:id="@+id/footer_subtotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -45,7 +45,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/check_list_footer_delivery_fee_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -63,7 +62,7 @@
                 android:textSize="@dimen/check_list_footer_total_text_size" />
 
             <TextView
-                android:id="@+id/check_list_footer_delivery_fee_text"
+                android:id="@+id/footer_delivery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -91,7 +90,7 @@
                 android:textSize="@dimen/check_list_footer_total_text_size" />
 
             <TextView
-                android:id="@+id/check_list_footer_total_text"
+                android:id="@+id/footer_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -111,7 +110,7 @@
             android:paddingBottom="@dimen/check_list_vertical_padding">
 
             <TextView
-                android:id="@+id/check_list_footer_recommended_tip_title"
+                android:id="@+id/rec_tip"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -120,7 +119,7 @@
                 android:textSize="@dimen/check_list_footer_total_text_size" />
 
             <TextView
-                android:id="@+id/check_list_footer_recommended_tip_text"
+                android:id="@+id/footer_tip"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="end"

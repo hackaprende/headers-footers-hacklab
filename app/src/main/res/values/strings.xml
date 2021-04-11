@@ -2,7 +2,6 @@
     <string name="app_name">restaurant-check</string>
     <string name="delivery_fee">Delivery fee</string>
     <string name="recommended_tip_format">Recommended tip (%d%%)</string>
-    <string name="check_important_data_hint">The check is informative.</string>
     <string name="your_total">Total</string>
     <string name="your_check">Your check</string>
     <string name="double_price_format">$%.2f</string>
